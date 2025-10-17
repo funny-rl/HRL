@@ -1,7 +1,7 @@
-SELECT BEFORE ACT: SPATIALLY DECOUPLED ACTION REPETITION FOR CONTINUOUS CONTROL : ICLR 2025\
-Learning Uncertainty-Aware Temporally-Extended Actions : AAAI 2024\
-TAAC: Temporally Abstract Actor-Critic for Continuous Control, https://proceedings.neurips.cc/paper_files/paper/2021/file/f337d999d9ad116a7b4f3d409fcc6480-Paper.pdf, NeurIPS 2021, 149, sampling한 action과 previous action중 선택\
-TempoRL: Learning When to Act : ICML 2021\
-
-
-
+| paper   | publish | year | citation | description                                                  |
+| :-----: | :-----: | :--: | :------: | :----------------------------------------------------------- |
+| SDAR    | ICLR    | 2025 | 0        |                                                              |
+| UTE     | AAAI    | 2024 | 2        |                                                              |
+| TAAC    | NeurIPS | 2021 | 37       |                                                              |
+| TempoRL | ICML    | 2021 | 47       | conditionize $j$ about $a$ and decompose objective function |
+| FiGAR   | ICLR    | 2017 | 148      | decide the action as well as the time scale of repeating it  |
