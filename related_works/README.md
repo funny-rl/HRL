@@ -1,4 +1,4 @@
-| paper   | publish | year | citation | description                                                  |
+| model   | publish | year | citation | description                                                  |
 | :-----: | :-----: | :--: | :------: | :----------------------------------------------------------- |
 | SDAR    | ICLR    | 2025 | 0        |                                                              |
 | UTE     | AAAI    | 2024 | 2        |                                                              |
