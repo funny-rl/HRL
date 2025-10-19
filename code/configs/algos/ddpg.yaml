@@ -2,7 +2,6 @@ name: ddpg
 
 defaults:
   - model: vanilla_ddpg
-  - _self_
 
 tau: 0.005 # target network update rate
 discount_factor: 0.99 # discount factor

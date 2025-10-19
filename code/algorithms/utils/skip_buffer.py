@@ -1,22 +1,17 @@
+from .vanilla_buffer import ReplayBuffer
+
 import torch
 import numpy as np
 
-class ReplayBuffer(object):
+class SkipReplayBuffer(ReplayBuffer):
     def __init__(self, state_dim, action_dim, buffer_size, device):
-        self.max_size = int(buffer_size)
-        self.ptr = 0
-        self.size = 0
-
-        self.state = np.zeros((self.max_size, state_dim))
-        self.action = np.zeros((self.max_size, action_dim))
-        self.next_state = np.zeros((self.max_size, state_dim))
-        self.reward = np.zeros((self.max_size, 1))
-        self.not_done = np.zeros((self.max_size, 1))
-        self.device = device
-
-    def add(self, state, action, next_state, reward, done):
+        super(SkipReplayBuffer, self).__init__(state_dim, action_dim, buffer_size, device)
+        self.rep = np.zeros((self.max_size, 1))
+        
+    def add(self, state, action, rep, next_state, reward, done):
         self.state[self.ptr] = state
         self.action[self.ptr] = action
+        self.rep[self.ptr] = rep
         self.next_state[self.ptr] = next_state
         self.reward[self.ptr] = reward
         self.not_done[self.ptr] = 1. - done
@@ -30,6 +25,7 @@ class ReplayBuffer(object):
         return (
             torch.FloatTensor(self.state[ind]).to(self.device),
             torch.FloatTensor(self.action[ind]).to(self.device),
+            torch.FloatTensor(self.rep[ind]).to(self.device),
             torch.FloatTensor(self.next_state[ind]).to(self.device),
             torch.FloatTensor(self.reward[ind]).to(self.device),
             torch.FloatTensor(self.not_done[ind]).to(self.device)

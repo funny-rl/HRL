@@ -1,4 +1,3 @@
-import wandb 
 import hydra
 import torch
 import numpy as np
@@ -11,7 +10,7 @@ from utils import set_seed
 from algorithms import ALGO_REGISTRY
 from algorithms.utils import BUFFER_REGISTRY    
 
-def eval(policy, env_name, seed, eval_episodes):
+def eval(policy, env_name, seed, eval_episodes, model_name):
     eval_env = gym.make(env_name)
     eval_env.reset(seed = seed + 100)
     avg_reward = 0.
@@ -19,17 +18,22 @@ def eval(policy, env_name, seed, eval_episodes):
     
     for _ in range(eval_episodes):
         state, _ = eval_env.reset()
-        repeatation = 1
+        repetition = 1
         done = False
         
         while not done:
             action = policy.select_action(np.array(state))
-            for _ in range(repeatation):
+            if model_name == "temporl":
+                repetition = np.argmax(policy.select_skip(np.array(state), action)) + 1
+            
+            for _ in range(repetition):
                 next_state, reward, terminated, truncated, _ = eval_env.step(action)
                 done = terminated or truncated
                 avg_reward += reward
                 avg_steps += 1
                 state = next_state
+                if done:
+                    break
         eval_env.close()
 
     avg_reward /= eval_episodes
@@ -44,7 +48,8 @@ def main(args):
     
     env_name = args.env_name
     algo_args = args.algos
-    model_name = algo_args.model.name
+    model_args = algo_args.model
+    model_name = model_args.name
     total_training_steps = args.total_training_steps
     warmup_steps = args.warmup_steps
     eval_n_episodes = args.eval_n_episodes
@@ -75,14 +80,19 @@ def main(args):
     }
 
     policy = ALGO_REGISTRY[model_name](model_dict, device)
-    replay_buffer = BUFFER_REGISTRY[model_name](state_dim, action_dim, algo_args.buffer_size, device)
+    
+    replay_buffer = BUFFER_REGISTRY["vanilla_ddpg"](state_dim, action_dim, algo_args.buffer_size, device)
+    if model_name == "temporl":
+        max_repetition = model_args.max_repetition
+        skip_e_greedy = model_args.skip_e_greedy
+        skip_replay_buffer = BUFFER_REGISTRY[model_name](state_dim, action_dim, algo_args.buffer_size, device)
 
     if use_wandb:
+        import wandb 
         wandb.init(
             project=env_name,       
             name=f"{env_name}_{model_name}_seed{seed}",
-            config=OmegaConf.to_container(args, resolve=True),
-            reinit=True
+            config=OmegaConf.to_container(args, resolve=True)
         )
 
     state, _ = env.reset()
@@ -94,49 +104,83 @@ def main(args):
         policy, 
         env_name, 
         seed, 
-        eval_episodes=eval_n_episodes
+        eval_episodes=eval_n_episodes,
+        model_name=model_name
     )
 
     training_steps = 0
-    skip_states, skip_rewards = [], []
+    
     while training_steps < total_training_steps:
-        episode_timesteps += 1
+        
 
         if training_steps < warmup_steps:
-            action = env.action_space.sample()
-            repetition = 1
+            action = env.action_space.sample() 
+            if model_name == "temporl":
+                repetition = np.random.randint(1, max_repetition + 1)
+            elif model_name == "vanilla_ddpg":
+                repetition = 1
         else:
             action = (
                 policy.select_action(np.array(state)) + \
                     np.random.normal(0, max_action * algo_args.expl_noise, size=action_dim)
             ).clip(-max_action, max_action)
+            if model_name == "temporl":
+                if np.random.random() < skip_e_greedy:
+                    repetition = np.random.randint(1, max_repetition + 1)
+                else:
+                    repetition = policy.select_skip(state, action)
+                    repetition = np.argmax(repetition) + 1
+                    
+            elif model_name == "vanilla_ddpg":
+                repetition = 1
+                    
 
         # number of repetitions for action repetition
+        skip_states, skip_rewards = [], []
         for repeat_step in range(repetition):
-            next_state, reward, terminated, truncated, _ = env.step(action)
+            
+            episode_timesteps += 1
             training_steps += 1
+        
+            next_state, reward, terminated, truncated, _ = env.step(action)
             done = terminated or truncated
             
             skip_states.append(state)
             skip_rewards.append(reward)
             
-
-            
             replay_buffer.add(
                 state, action, next_state, reward, done
             )
             
+            if model_name == "temporl":
+                skip_id = 0
+                for start_state in skip_states:
+                    skip_reward = 0
+                    for exp, r in enumerate(skip_rewards[skip_id:]):
+                        skip_reward += np.power(policy.discount, exp) * r
+                    skip_replay_buffer.add(
+                        start_state, 
+                        action, 
+                        repeat_step - skip_id, 
+                        next_state, 
+                        skip_reward, 
+                        done
+                    )
+                    skip_id += 1
+                
             state = next_state
             episode_reward += reward
             
             # Train agent after collecting sufficient data
             if training_steps >= warmup_steps:
                 policy.train(replay_buffer, algo_args.batch_size)
+                if model_name == "temporl":
+                    policy.train_skip(skip_replay_buffer, algo_args.batch_size)
                 
             if done:
                 # +1 to account for 0 indexing. +0 on ep_timesteps since it will increment +1 even if done=True
                 print(
-                    f"Training steps: {training_steps + 1} Episode Num: {episode_num + 1} Episode T: {episode_timesteps} Reward: {episode_reward:.3f}")
+                    f"Training steps: {training_steps + 1} Episode Num: {episode_num + 1} Episode_Length: {episode_timesteps} Reward: {episode_reward:.3f}")
                 if use_wandb:
                     wandb.log(
                         {
@@ -157,7 +201,8 @@ def main(args):
                     policy, 
                     env_name, 
                     seed, 
-                    eval_episodes=eval_n_episodes
+                    eval_episodes=eval_n_episodes,
+                    model_name=model_name
                 )
                 if use_wandb:
                     wandb.log(
