@@ -1,0 +1,11 @@
+Error executing job with overrides: ['env_name=Pendulum-v1', 'algos.model.name=vanilla_ddpg']
+Traceback (most recent call last):
+  File "/gpfs/home1/aiphw227/HRL/code/main.py", line 96, in main
+    avg_reward, avg_steps = eval(
+                            ^^^^^
+  File "/gpfs/home1/aiphw227/HRL/code/main.py", line 28, in eval
+    avg_decs += 1
+    ^^^^^^^^
+UnboundLocalError: cannot access local variable 'avg_decs' where it is not associated with a value
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

@@ -1,0 +1,23 @@
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_setup.py:_flush():81] Current SDK version is 0.22.2
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_setup.py:_flush():81] Configure stats pid to 3166953
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_setup.py:_flush():81] Loading settings from /home1/aiphw227/.config/wandb/settings
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_setup.py:_flush():81] Loading settings from /gpfs/home1/aiphw227/HRL/code/wandb/settings
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_init.py:setup_run_log_directory():705] Logging user logs to /gpfs/home1/aiphw227/HRL/code/wandb/run-20251019_102910-vbx2dm3a/logs/debug.log
+2025-10-19 10:29:10,694 INFO    MainThread:3166953 [wandb_init.py:setup_run_log_directory():706] Logging internal logs to /gpfs/home1/aiphw227/HRL/code/wandb/run-20251019_102910-vbx2dm3a/logs/debug-internal.log
+2025-10-19 10:29:10,695 INFO    MainThread:3166953 [wandb_init.py:init():832] calling init triggers
+2025-10-19 10:29:10,695 INFO    MainThread:3166953 [wandb_init.py:init():837] wandb.init called with sweep_config: {}
+config: {'algos': {'model': {'name': 'vanilla_ddpg'}, 'name': 'ddpg', 'tau': 0.005, 'discount_factor': 0.99, 'actor_lr': 0.0001, 'critic_lr': 0.0001, 'buffer_size': 1000000.0, 'expl_noise': 0.1, 'batch_size': 100}, 'log_level': 'INFO', 'episodes': 100, 'warmup_steps': 1000, 'total_training_steps': 50000, 'out_dir': None, 'out_dir_suffix': 'paramsseed', 'seed': 0, 'eval_interval': 1000, 'eval_n_episodes': 100, 'env_name': 'Pendulum-v1', 'use_wandb': True, '_wandb': {}}
+2025-10-19 10:29:10,695 INFO    MainThread:3166953 [wandb_init.py:init():880] starting backend
+2025-10-19 10:29:10,907 INFO    MainThread:3166953 [wandb_init.py:init():883] sending inform_init request
+2025-10-19 10:29:10,910 INFO    MainThread:3166953 [wandb_init.py:init():891] backend started and connected
+2025-10-19 10:29:10,912 INFO    MainThread:3166953 [wandb_init.py:init():961] updated telemetry
+2025-10-19 10:29:10,917 INFO    MainThread:3166953 [wandb_init.py:init():985] communicating run to backend with 90.0 second timeout
+2025-10-19 10:29:11,567 INFO    MainThread:3166953 [wandb_init.py:init():1036] starting run threads in backend
+2025-10-19 10:29:11,642 INFO    MainThread:3166953 [wandb_run.py:_console_start():2509] atexit reg
+2025-10-19 10:29:11,642 INFO    MainThread:3166953 [wandb_run.py:_redirect():2357] redirect: wrap_raw
+2025-10-19 10:29:11,642 INFO    MainThread:3166953 [wandb_run.py:_redirect():2426] Wrapping output streams.
+2025-10-19 10:29:11,642 INFO    MainThread:3166953 [wandb_run.py:_redirect():2449] Redirects installed.
+2025-10-19 10:29:11,645 INFO    MainThread:3166953 [wandb_init.py:init():1076] run started, returning control to user process
+2025-10-19 10:38:12,938 INFO    wandb-AsyncioManager-main:3166953 [service_client.py:_forward_responses():80] Reached EOF.
+2025-10-19 10:38:12,938 INFO    wandb-AsyncioManager-main:3166953 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.

@@ -1,0 +1,19 @@
+log_level: INFO
+
+defaults:
+  - algos: ddpg
+  - _self_
+
+episodes: 100
+warmup_steps: 1000
+total_training_steps: 50000
+out_dir: null
+out_dir_suffix: paramsseed
+seed: 0
+eval_interval: 1000 # in step units
+eval_n_episodes: 100
+env_name: null
+use_wandb: false
+
+
+

@@ -1,0 +1,105 @@
+2025-10-19 10:28:11,581 INFO    MainThread:3166739 [wandb_setup.py:_flush():81] Current SDK version is 0.22.2
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_setup.py:_flush():81] Configure stats pid to 3166739
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_setup.py:_flush():81] Loading settings from /home1/aiphw227/.config/wandb/settings
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_setup.py:_flush():81] Loading settings from /gpfs/home1/aiphw227/HRL/code/wandb/settings
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_init.py:setup_run_log_directory():705] Logging user logs to /gpfs/home1/aiphw227/HRL/code/wandb/run-20251019_102811-evvv4h7m/logs/debug.log
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_init.py:setup_run_log_directory():706] Logging internal logs to /gpfs/home1/aiphw227/HRL/code/wandb/run-20251019_102811-evvv4h7m/logs/debug-internal.log
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_init.py:init():832] calling init triggers
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_init.py:init():837] wandb.init called with sweep_config: {}
+config: {'algos': {'model': {'name': 'vanilla_ddpg'}, 'name': 'ddpg', 'tau': 0.005, 'discount_factor': 0.99, 'actor_lr': 0.0001, 'critic_lr': 0.0001, 'buffer_size': 1000000.0, 'expl_noise': 0.1, 'batch_size': 100}, 'log_level': 'INFO', 'episodes': 100, 'warmup_steps': 1000, 'total_training_steps': 50000, 'out_dir': None, 'out_dir_suffix': 'paramsseed', 'seed': 0, 'eval_interval': 1000, 'eval_n_episodes': 100, 'env_name': 'Pendulum-v1', 'use_wandb': True, '_wandb': {}}
+2025-10-19 10:28:11,582 INFO    MainThread:3166739 [wandb_init.py:init():880] starting backend
+2025-10-19 10:28:11,794 INFO    MainThread:3166739 [wandb_init.py:init():883] sending inform_init request
+2025-10-19 10:28:11,799 INFO    MainThread:3166739 [wandb_init.py:init():891] backend started and connected
+2025-10-19 10:28:11,800 INFO    MainThread:3166739 [wandb_init.py:init():961] updated telemetry
+2025-10-19 10:28:11,805 INFO    MainThread:3166739 [wandb_init.py:init():985] communicating run to backend with 90.0 second timeout
+2025-10-19 10:28:12,418 INFO    MainThread:3166739 [wandb_init.py:init():1036] starting run threads in backend
+2025-10-19 10:28:12,494 INFO    MainThread:3166739 [wandb_run.py:_console_start():2509] atexit reg
+2025-10-19 10:28:12,494 INFO    MainThread:3166739 [wandb_run.py:_redirect():2357] redirect: wrap_raw
+2025-10-19 10:28:12,494 INFO    MainThread:3166739 [wandb_run.py:_redirect():2426] Wrapping output streams.
+2025-10-19 10:28:12,494 INFO    MainThread:3166739 [wandb_run.py:_redirect():2449] Redirects installed.
+2025-10-19 10:28:12,497 INFO    MainThread:3166739 [wandb_init.py:init():1076] run started, returning control to user process
+2025-10-19 10:28:34,515 INFO    wandb-AsyncioManager-main:3166739 [service_client.py:_forward_responses():80] Reached EOF.
+2025-10-19 10:28:34,515 INFO    wandb-AsyncioManager-main:3166739 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.
+2025-10-19 10:28:34,783 ERROR   MainThread:3166739 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 2436, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 399, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 457, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1595, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/interface/interface.py", line 802, in publish_output_raw
+    self._publish_output_raw(o)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/interface/interface_shared.py", line 37, in _publish_output_raw
+    self._publish(rec)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/interface/interface_sock.py", line 43, in _publish
+    self._asyncer.run(lambda: self._client.publish(request))
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 136, in run
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 219, in _wrap
+    return await fn()
+           ^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/asyncio/streams.py", line 378, in drain
+    await self._protocol._drain_helper()
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/asyncio/streams.py", line 167, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2025-10-19 10:28:34,791 ERROR   MainThread:3166739 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 2436, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 399, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 457, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1595, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/interface/interface.py", line 802, in publish_output_raw
+    self._publish_output_raw(o)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/interface/interface_shared.py", line 37, in _publish_output_raw
+    self._publish(rec)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/interface/interface_sock.py", line 43, in _publish
+    self._asyncer.run(lambda: self._client.publish(request))
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 136, in run
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/asyncio_manager.py", line 219, in _wrap
+    return await fn()
+           ^^^^^^^^^^
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/service/service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/site-packages/wandb/sdk/lib/service/service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/asyncio/streams.py", line 378, in drain
+    await self._protocol._drain_helper()
+  File "/home1/aiphw227/miniconda3/envs/rl/lib/python3.11/asyncio/streams.py", line 167, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost

@@ -1,0 +1,148 @@
+_wandb:
+    value:
+        cli_version: 0.22.2
+        e:
+            pr0jjotrtqwrtfkch0bm7z49xnqlwnff:
+                args:
+                    - algos.model.name=vanilla_ddpg
+                    - env_name=Pendulum-v1
+                    - use_wandb=true
+                codePath: code/main.py
+                codePathLocal: main.py
+                cpu_count: 48
+                cpu_count_logical: 48
+                cudaVersion: "12.5"
+                disk:
+                    /:
+                        total: "405099708416"
+                        used: "207541551104"
+                email: singfor7012@gmail.com
+                executable: /home1/aiphw227/miniconda3/envs/rl/bin/python
+                git:
+                    commit: d87945ba59931fdc09f85fb924a8d37e97dfc8bf
+                    remote: https://github.com/funny-rl/HRL.git
+                gpu: NVIDIA A10
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 9216
+                      memoryTotal: "24146608128"
+                      name: NVIDIA A10
+                      uuid: GPU-39a793d3-2538-c7df-8d3a-728d4c2c6fba
+                host: n031.hpc
+                memory:
+                    total: "810199416832"
+                os: Linux-4.18.0-553.5.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /gpfs/home1/aiphw227/HRL/code/main.py
+                python: CPython 3.11.0
+                root: /gpfs/home1/aiphw227/HRL/code
+                slurm:
+                    cluster_name: cluster
+                    conf: /var/spool/slurmd/conf-cache/slurm.conf
+                    cpu_bind: quiet,mask_cpu:0x0000000FFFFF
+                    cpu_bind_list: "0x0000000FFFFF"
+                    cpu_bind_type: 'mask_cpu:'
+                    cpu_bind_verbose: quiet
+                    cpus_on_node: "20"
+                    cpus_per_task: "20"
+                    gpus_on_node: "1"
+                    gtids: "0"
+                    job_account: uos
+                    job_cpus_per_node: "20"
+                    job_end_time: "1760973836"
+                    job_gid: "100"
+                    job_group: users
+                    job_id: "495431"
+                    job_name: bash
+                    job_nodelist: n031
+                    job_num_nodes: "1"
+                    job_partition: gpu6
+                    job_qos: max_10
+                    job_start_time: "1760801036"
+                    job_uid: "1291"
+                    job_user: aiphw227
+                    jobid: "495431"
+                    launch_node_ipaddr: 192.168.140.5
+                    localid: "0"
+                    nnodes: "1"
+                    nodeid: "0"
+                    nodelist: n031
+                    nprocs: "1"
+                    ntasks: "1"
+                    prio_process: "0"
+                    procid: "0"
+                    pty_port: "39365"
+                    pty_win_col: "132"
+                    pty_win_row: "29"
+                    srun_comm_host: 192.168.140.5
+                    srun_comm_port: "34589"
+                    step_gpus: "0"
+                    step_id: "0"
+                    step_launcher_port: "34589"
+                    step_nodelist: n031
+                    step_num_nodes: "1"
+                    step_num_tasks: "1"
+                    step_tasks_per_node: "1"
+                    stepid: "0"
+                    submit_dir: /gpfs/home1/aiphw227
+                    submit_host: gate2.hpc
+                    task_pid: "3057847"
+                    tasks_per_node: "1"
+                    topology_addr: n031
+                    topology_addr_pattern: node
+                    tres_per_task: cpu:20
+                    umask: "0022"
+                startedAt: "2025-10-19T01:25:36.532626Z"
+                writerId: pr0jjotrtqwrtfkch0bm7z49xnqlwnff
+        m: []
+        python_version: 3.11.0
+        t:
+            "1":
+                - 1
+                - 50
+            "2":
+                - 1
+                - 50
+            "3":
+                - 13
+                - 16
+                - 61
+            "4": 3.11.0
+            "5": 0.22.2
+            "10":
+                - 20
+            "12": 0.22.2
+            "13": linux-x86_64
+algos:
+    value:
+        actor_lr: 0.0001
+        batch_size: 100
+        buffer_size: 1e+06
+        critic_lr: 0.0001
+        discount_factor: 0.99
+        expl_noise: 0.1
+        model:
+            name: vanilla_ddpg
+        tau: 0.005
+env_name:
+    value: Pendulum-v1
+episodes:
+    value: 100
+eval_interval:
+    value: 1000
+eval_n_episodes:
+    value: 100
+log_level:
+    value: INFO
+out_dir:
+    value: null
+out_dir_suffix:
+    value: paramsseed
+seed:
+    value: 0
+total_training_steps:
+    value: 50000
+use_wandb:
+    value: true
+warmup_steps:
+    value: 1000
