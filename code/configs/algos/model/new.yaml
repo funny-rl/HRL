@@ -1,0 +1,8 @@
+name: new
+max_repetition: 10
+skip_actor_lr: 0.0001
+skip_q_lr: 0.0001
+rep_dist: poisson
+softmax_tau: 1
+scale_coef: 10
+n_step_Q: true

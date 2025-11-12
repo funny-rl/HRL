@@ -1,4 +1,6 @@
 name: temporl
-max_repetition: 20
+max_repetition: 10
 skip_q_lr: 0.0001
 skip_e_greedy: 0.1
+use_interpolation: false
+alpha: 0.5

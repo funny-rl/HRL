@@ -15,8 +15,14 @@ if [ -z "$USE_WANDB" ]; then # if USE_WANDB is not provided, set default
     USE_WANDB=false
 fi
 
-python main.py \
-    env_name=Pendulum-v1 \
-    algos/model=$MODEL \
-    use_wandb=$USE_WANDB \
-    total_training_steps=30000 \
+for SEED in 0 1 2 3 4
+do
+    python main.py \
+        seed=$SEED \
+        env_name=InvertedDoublePendulum-v5 \
+        algos/model=$MODEL \
+        use_wandb=$USE_WANDB \
+        total_training_steps=50000
+done
+
+MountainCarContinuous-v0
